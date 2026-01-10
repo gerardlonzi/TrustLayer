@@ -11,7 +11,11 @@ export default function Home() {
   const [result, setResult] = useState<any>(null)
 
 useEffect(()=>{
-  fetch(`/api/trust/score?emailValid=${emailValid}`).
+  fetch(`/api/trust/score?emailValid=${emailValid}`,{
+    headers:{
+      Authorization :"Bearer tl_test_123456"
+    }
+  }).
   then(res=>res.json())
   .then(data=>setResult(data.data))
 
