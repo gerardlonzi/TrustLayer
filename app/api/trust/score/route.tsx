@@ -1,26 +1,26 @@
-import { NextResponse } from "next/server";
-import { CalculateTrustcore } from "@/lib/trust/score";
-import { IsvalidApi_key } from "@/lib/Api_keys";
-import { Validator_email } from "@/lib/trust/email";
+import { NextResponse } from "next/server"
+import { evaluateTrust } from "@/lib/trust/engine"
 
-export async function GET(request:Request){
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
 
-    const Api_key = request.headers.get("Authorization")?.replace("Bearer ","") 
-    if(!IsvalidApi_key(Api_key)){
-        return NextResponse.json({error :"Unauthorized"},{status : 401})
+  const userSignals = {
+    ip: searchParams.get("ip")!,
+    timezone: searchParams.get("timezone") || undefined,
+    latitude: Number(searchParams.get("lat")),
+    longitude: Number(searchParams.get("lon")),
+    ipInfo: {
+      timezone: "Africa/Douala",
+      latitude: 3.848,
+      longitude: 11.502,
+      vpn: false,
+      proxy: false,
+      tor: false,
+      hosting: false
     }
-    const {searchParams} = new URL(request.url)
-    const email = searchParams.get("emailValid")
-    if(!email){
-        return NextResponse.json({error : "email is required"},{status:400})
-    }
+  }
 
-    const emailCheck = await Validator_email(email)
-    const result = CalculateTrustcore(emailCheck.valid)
+  const result = evaluateTrust(userSignals)
 
-    return NextResponse.json({
-        success:true,
-        data : result,
-        email: emailCheck
-    })
-}   
+  return NextResponse.json(result)
+}

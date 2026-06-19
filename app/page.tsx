@@ -4,7 +4,7 @@
 import Image from "next/image";
 import TrustPage from "@/public/components/TrustPage";
 import { useState,useEffect } from "react";
-import { CalculateTrustcore } from "@/lib/trust/score";
+import { calculateTrustScore } from "@/lib/trust/score";
 
 export default function Home() {
   const [emailValid,setValidEmail] = useState(false)
