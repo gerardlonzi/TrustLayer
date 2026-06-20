@@ -9,11 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.2",
+    "clsx": "^2.1.1",
     "disposable-email-domains": "^1.0.62",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "validator": "^13.15.26"
+    "tailwind-merge": "^3.6.0",
+    "validator": "^13.15.26",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -23,6 +28,10 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.4",
     "prisma": "^7.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
